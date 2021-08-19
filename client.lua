@@ -1,6 +1,12 @@
+local server = false
+
 RegisterNUICallback("dataPost", function(data, cb)
     SetNuiFocus(false)
-    TriggerEvent(data.event, data.args)
+    if server then
+        TriggerServerEvent(data.event, data.args)
+    else
+        TriggerEvent(data.event, data.args)
+    end
     cb('ok')
 end)
 
@@ -9,8 +15,9 @@ RegisterNUICallback("cancel", function()
 end)
 
 
-RegisterNetEvent('nh-context:sendMenu', function(data)
+RegisterNetEvent('nh-context:sendMenu', function(data, toServer)
     if not data then return end
+    if toServer then server = true end    
     SetNuiFocus(true, true)
     SendNUIMessage({
         action = "OPEN_MENU",
