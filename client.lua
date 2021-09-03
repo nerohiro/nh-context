@@ -4,6 +4,7 @@ RegisterNUICallback("dataPost", function(data, cb)
     SetNuiFocus(false)
     if server then
         TriggerServerEvent(data.event, data.args)
+        server = false
     else
         TriggerEvent(data.event, data.args)
     end
