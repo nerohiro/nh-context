@@ -9,6 +9,7 @@ RegisterNUICallback("dataPost", function(data, cb)
     else
         TriggerEvent(data.event, data.args)
     end
+    menuOpen = false
     cb('ok')
 end)
 
