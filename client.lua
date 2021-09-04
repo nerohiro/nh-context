@@ -17,7 +17,8 @@ end)
 
 RegisterNetEvent('nh-context:sendMenu', function(data, toServer)
     if not data then return end
-    if toServer then server = true end    
+    server = false
+    if toServer then server = true end 
     SetNuiFocus(true, true)
     SendNUIMessage({
         action = "OPEN_MENU",
