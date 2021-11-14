@@ -61,7 +61,7 @@ end)
 Note: Anything not marked "Required" below you don't even have to include if you don't want to.
 ```
     {
-        header = "The Header, whatever you want to put" -- Required
+        header = "The Header, whatever you want to put", -- Required
         context = "The base of the text in the button",
         server = "pass "true" if you want the button to trigger a server event"
         image = "add an image url here and itll show off to the left side when you hover over this button, example below"
