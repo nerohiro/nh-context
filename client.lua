@@ -3,14 +3,14 @@ local Promise, ActiveMenu = nil, false
 RegisterNUICallback("dataPost", function(data, cb)
     SetNuiFocus(false, false)
     if Promise ~= nil then
-        if data.returnValue ~= nil then
+        if data.returnValue then
             Promise:resolve(data.returnValue)
         else
             Promise:resolve(true)
         end
         Promise = nil
     end
-    if data.returnValue == nil then
+    if data.event and not data.returnValue then
         if not data.server then
             TriggerEvent(data.event, data.args)
         else
