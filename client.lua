@@ -101,4 +101,4 @@ RegisterNetEvent("nh-context:createMenu", function(data)
     CreateMenu(data)
 end)
 
-RegisterNetEvent("context:cancelMenu", CancelMenu)
+RegisterNetEvent("nh-context:cancelMenu", CancelMenu)
