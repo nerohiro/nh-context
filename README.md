@@ -52,7 +52,6 @@ RegisterNetEvent('nh-context:testMenu2', function(data)
     TriggerEvent('nh-context:createMenu', {
         [1] = {
             header = "< Go Back",
-            context = "",
             event = "nh-context:testMenu"
         },
         [2] = {
