@@ -14,7 +14,7 @@ RegisterNUICallback("dataPost", function(data, cb)
         if not data.server then
             TriggerEvent(data.event, data.args)
         else
-            TriggerNetEvent(data.event, data.args)
+            TriggerServerEvent(data.event, data.args)
         end
     end
     ActiveMenu = false
