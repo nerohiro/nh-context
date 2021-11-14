@@ -37,12 +37,12 @@ $(document).click(function (event) {
 })
 
 const PostData = (id) => {
-    $.post(`https://rz-context/dataPost`, JSON.stringify(Button[id]))
+    $.post(`https://nh-context/dataPost`, JSON.stringify(Button[id]))
     return CloseMenu();
 }
 
 const CancelMenu = () => {
-    $.post(`https://rz-context/cancel`)
+    $.post(`https://nh-context/cancel`)
     return CloseMenu();
 }
 

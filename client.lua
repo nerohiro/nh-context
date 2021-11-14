@@ -71,8 +71,3 @@ end)
 RegisterNetEvent("nh-context:closeMenu", function()
     CloseMenu()
 end)
-
-
-RegisterNetEvent('base:DestroyNUI', function()
-    CloseMenu()
-end)
