@@ -47,6 +47,7 @@ body::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     box-shadow: 0.0rem 0.0rem 0.1rem 0.05rem #000000;
+    user-select: none;
 }
 
 .button:hover{

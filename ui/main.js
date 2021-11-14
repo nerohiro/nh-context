@@ -1,4 +1,3 @@
-let ButtonsData = [];
 let Buttons = [];
 let Button = [];
 
@@ -7,53 +6,43 @@ const OpenMenu = (data) => {
 }
 
 const CloseMenu = () => {
-    for (let i = 0; i < ButtonsData.length; i++) {
-        let id = ButtonsData[i].id
-        $(".button").remove();
-    }
-    ButtonsData = [];
+    $(".button").remove();
     Buttons = [];
     Button = [];
 };
 
 const DrawButtons = (data) => {
-    ButtonsData = data
-    for (let i = 0; i < ButtonsData.length; i++) {
-        let header = ButtonsData[i].header
-        let message = ButtonsData[i].txt
-        let id = ButtonsData[i].id
-        let element
-
-        element = $(`
-            <div class="button" id=`+id+`>
-              <div class="header" id=`+id+`>`+header+`</div>
-              <div class="txt" id=`+id+`>`+message+`</div>
+    for (const key of Object.keys(data)) {
+        let context = data[key].context ? data[key].context : ""
+        let element = $(`
+            <div class="button" id=`+ key + `>
+              <div class="header" id=`+ key + `>` + data[key].header + `</div>
+              <div class="txt" id=`+ key + `>` + context + `</div>
             </div>`
         );
         $('#buttons').append(element);
-        Buttons[id] = element
-        if (ButtonsData[i].params) {
-            Button[id] = ButtonsData[i].params
-        }
+        Buttons[key] = element
+        Button[key] = data[key]
     }
 };
 
-$(document).click(function(event){
+$(document).click(function (event) {
     let $target = $(event.target);
     if ($target.closest('.button').length && $('.button').is(":visible")) {
         let id = event.target.id;
         if (!Button[id]) return
         PostData(id)
+        document.getElementById('imageHover').style.display = 'none';
     }
 })
 
 const PostData = (id) => {
-    $.post(`https://nh-context/dataPost`, JSON.stringify(Button[id]))
+    $.post(`https://rz-context/dataPost`, JSON.stringify(Button[id]))
     return CloseMenu();
 }
 
 const CancelMenu = () => {
-    $.post(`https://nh-context/cancel`)
+    $.post(`https://rz-context/cancel`)
     return CloseMenu();
 }
 
@@ -71,11 +60,24 @@ window.addEventListener("message", (evt) => {
     }
 })
 
-
-document.onkeyup = function (event) {
-    event = event || window.event;
-    var charCode = event.keyCode || event.which;
-    if (charCode == 27) {
+window.addEventListener("keyup", (ev) => {
+    if (ev.which == 27) {
         CancelMenu();
+        document.getElementById('imageHover').style.display = 'none';
     }
-};
+})
+
+window.addEventListener('mousemove', (event) => {
+    let $target = $(event.target);
+    if ($target.closest('.button:hover').length && $('.button').is(":visible")) {
+        let id = event.target.id;
+        if (!Button[id]) return
+        if (Button[id].image) {
+            document.getElementById('image').src = Button[id].image;
+            document.getElementById('imageHover').style.display = 'block';
+        }
+    }
+    else {
+        document.getElementById('imageHover').style.display = 'none';
+    }
+})

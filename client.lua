@@ -1,26 +1,78 @@
-local server = false
+local Promise, ActiveMenu = nil, false
 
 RegisterNUICallback("dataPost", function(data, cb)
-    SetNuiFocus(false)
-    if server then
-        TriggerServerEvent(data.event, data.args)
-    else
-        TriggerEvent(data.event, data.args)
+    SetNuiFocus(false, false)
+    if Promise ~= nil then
+        if data.returnValue ~= nil then
+            Promise:resolve(data.returnValue)
+        else
+            Promise:resolve(true)
+        end
+        Promise = nil
     end
-    cb('ok')
+    if data.returnValue == nil then
+        if not data.server then
+            TriggerEvent(data.event, data.args)
+        else
+            TriggerNetEvent(data.event, data.args)
+        end
+    end
+    ActiveMenu = false
 end)
 
 RegisterNUICallback("cancel", function()
-    SetNuiFocus(false)
+    SetNuiFocus(false, false)
+    if Promise ~= nil then
+        Promise:resolve(nil)
+        Promise = nil
+    end
+    ActiveMenu = false
 end)
 
-
-RegisterNetEvent('nh-context:sendMenu', function(data, toServer)
-    if not data then return end
-    if toServer then server = true end    
+CreateMenu = function(data)
+    ActiveMenu = true
     SetNuiFocus(true, true)
     SendNUIMessage({
         action = "OPEN_MENU",
         data = data
     })
+end
+
+ContextMenu = function(data)
+    if not data or Promise ~= nil then return end
+    while ActiveMenu do Wait(0) end
+
+    Promise = promise.new()
+
+    CreateMenu(data)
+
+    return Citizen.Await(Promise)
+end
+
+CloseMenu = function()
+    SetNuiFocus(false, false)
+    SendNUIMessage({
+        action = "CLOSE_MENU",
+    })
+    ActiveMenu = false
+end
+
+exports("ContextMenu", ContextMenu)
+exports("CloseMenu", CloseMenu)
+
+
+
+RegisterNetEvent('nh-context:createMenu', function(data)
+    if not data then return end
+    while ActiveMenu do Wait(0) end
+    CreateMenu(data)
+end)
+
+RegisterNetEvent("nh-context:closeMenu", function()
+    CloseMenu()
+end)
+
+
+RegisterNetEvent('base:DestroyNUI', function()
+    CloseMenu()
 end)
