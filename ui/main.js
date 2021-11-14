@@ -30,7 +30,7 @@ $(document).click(function (event) {
     let $target = $(event.target);
     if ($target.closest('.button').length && $('.button').is(":visible")) {
         let id = event.target.id;
-        if (!Button[id].event || !Button[id].returnValue) return
+        if (!Button[id].event && !Button[id].returnValue) return;
         PostData(id)
         document.getElementById('imageHover').style.display = 'none';
     }
