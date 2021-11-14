@@ -30,10 +30,10 @@ end)
 
 RegisterNetEvent("nh-context:testMenu", function()
     TriggerEvent("nh-context:createMenu", {
-        [1] = {
+        {
             header = "Main Title",
         },
-        [2] = {
+        {
             header = "Sub Menu Button",
             context = "This goes to a sub menu",
             event = "nh-context:testMenu2",
@@ -45,11 +45,11 @@ end)
 
 RegisterNetEvent('nh-context:testMenu2', function(id, number)
     TriggerEvent('nh-context:createMenu', {
-        [1] = {
+        {
             header = "< Go Back",
             event = "nh-context:testMenu"
         },
-        [2] = {
+        {
             header = "Number: " .. number,
             context = "ID: " .. id
         },
@@ -60,7 +60,6 @@ end)
 
 Note: Anything not marked "Required" below you don't even have to include if you don't want to.
 ```
-[1] = -- The ID that controls the order of the menu as you send it, this is assigned as an object now to make it easier to understand -- Required
     {
         header = "The Header, whatever you want to put" -- Required
         context = "The base of the text in the button",
@@ -72,7 +71,6 @@ Note: Anything not marked "Required" below you don't even have to include if you
             integer,
             boolean -- the order you put these in will be the order they kick out thru the receiving event function(table, integer, boolean)
         }
-
     }
 ```
 
@@ -84,23 +82,20 @@ Example of using a table to build a menu:
 ```
 
 local menu = {
-    [1] = {
+    {
         header = "Title Here",
         context = ""
     }
 }
 
 for k, v in pairs(randomTable) do
-
-    local key = #menu + 1
-    menu[key] = {
+    table.insert(menu,  {
         header = "Random Title " .. key .. " data: " .. k,
         context = "Random context " .. key .. " data: " .. v,
         server = true -- this passes the event below to the server instead of client
         image = "show a cool image ending in jpg, png, gif, etc"
         event = "this fires some event"
     }
-
 end
 
 TriggerEvent('nh-context:createMenu', menu)
@@ -111,15 +106,15 @@ Exmaple of using the Function to build an asyncronous menu
 
 ```
     local accept = exports["nh-context"]:ContextMenu({
-        [1] = {
+        {
             header = "Pick One",
         },
-        [2] = {
+        {
             header = "Number: " .. number,
             context = "ID: " .. id
             returnValue = "1"
         },
-        [3] = {
+        {
             header = "Number: " .. number,
             context = "ID: " .. id
             returnValue = "2"

@@ -12,19 +12,20 @@ const CloseMenu = () => {
 };
 
 const DrawButtons = (data) => {
-    for (const key of Object.keys(data)) {
-        let context = data[key].context ? data[key].context : ""
+    for (let i = 0; i < data.length; i++) {
+        let context = data[i].context ? data[i].context : ""
         let element = $(`
-            <div class="button" id=`+ key + `>
-              <div class="header" id=`+ key + `>` + data[key].header + `</div>
-              <div class="txt" id=`+ key + `>` + context + `</div>
+            <div class="button" id=`+ i + `>
+              <div class="header" id=`+ i + `>` + data[i].header + `</div>
+              <div class="txt" id=`+ i + `>` + context + `</div>
             </div>`
         );
         $('#buttons').append(element);
-        Buttons[key] = element
-        Button[key] = data[key]
+        Buttons[i] = element
+        Button[i] = data[i]
     }
 };
+
 
 $(document).click(function (event) {
     let $target = $(event.target);
