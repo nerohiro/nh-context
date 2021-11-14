@@ -2,7 +2,7 @@
 Simple, minimalistic event firing context menu for RedM and FiveM
 
 # Information
-I really liked the look of these dark themed context menus but haven't seen alot released, now I'm sure mine isn't the best it's one of my first few public scripts and I feel it's really user friendly, I hope you all find a use for this and enjoy it!
+I really liked the look of these dark themed context menus but haven't seen a lot released, now I'm sure mine isn't the best it's one of my first few public scripts and I feel it's really user friendly, I hope you all find a use for this and enjoy it!
 
 ![ShowCase](https://lithi.io/file/LY0d.png)
 ![ShowCase](https://lithi.io/file/60f7.png)
@@ -22,7 +22,7 @@ in your server.cfg.
 
 https://streamable.com/w04k9z
 
-Here is a base menu to show how it works, this is a kinda "figure it out" type of situation but I hope my examples work, the code below is what made the video above!
+Here is a base menu to show how it works, this is a kind of a "figure it out" type of situation but I hope my examples help, the code below is what made the video above!
 ```
 RegisterCommand("testcontext", function()
     TriggerEvent("nh-context:testmenu")
@@ -38,17 +38,12 @@ RegisterNetEvent("nh-context:testMenu", function()
             context = "This goes to a sub menu",
             event = "nh-context:testMenu2",
             image = "https://i.imgur.com/xO1mXkX.png",
-            args = {
-                number = 1,
-                id = 2
-            }
+            args = {1,2}
         }
     })
 end)
 
-RegisterNetEvent('nh-context:testMenu2', function(data)
-    local id = data.id
-    local number = data.number
+RegisterNetEvent('nh-context:testMenu2', function(id, number)
     TriggerEvent('nh-context:createMenu', {
         [1] = {
             header = "< Go Back",
@@ -73,9 +68,9 @@ Note: Anything not marked "Required" below you don't even have to include if you
         image = "add an image url here and itll show off to the left side when you hover over this button, example below"
         event = "the event you actually want to trigger, remember if you set it server = true this will pass to the server side"
         args = { -- These are the arguments you send with the event
-            arg1 = table,
-            args2 = integar,
-            args3 = boolean -- you don't have to actually pass these in any order, just showing they can pass anything
+            table,
+            integer,
+            boolean -- the order you put these in will be the order they kick out thru the receiving event function(table, integer, boolean)
         }
 
     }

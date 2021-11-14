@@ -38,12 +38,10 @@ $(document).click(function (event) {
 
 const PostData = (id) => {
     $.post(`https://nh-context/dataPost`, JSON.stringify(Button[id]))
-    return CloseMenu();
 }
 
 const CancelMenu = () => {
     $.post(`https://nh-context/cancel`)
-    return CloseMenu();
 }
 
 window.addEventListener("message", (evt) => {
@@ -55,6 +53,8 @@ window.addEventListener("message", (evt) => {
             return OpenMenu(info);
         case "CLOSE_MENU":
             return CloseMenu();
+        case "CANCEL_MENU":
+            return CancelMenu();
         default:
             return;
     }
