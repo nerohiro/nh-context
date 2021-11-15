@@ -4,11 +4,6 @@ Simple, minimalistic event firing context menu for RedM and FiveM
 # Information
 I really liked the look of these dark themed context menus but haven't seen a lot released, now I'm sure mine isn't the best it's one of my first few public scripts and I feel it's really user friendly, I hope you all find a use for this and enjoy it!
 
-![ShowCase](https://lithi.io/file/LY0d.png)
-![ShowCase](https://lithi.io/file/60f7.png)
-![ShowCase](https://lithi.io/file/dDnO.png)
-
-
 
 # Setup
 It's pretty simple, once you drop the nh-context resource into your resources folder just make sure you put
@@ -20,7 +15,7 @@ in your server.cfg.
 
 # Usage
 
-https://streamable.com/w04k9z
+https://streamable.com/j4wkwi
 
 Here is a base menu to show how it works, this is a kind of a "figure it out" type of situation but I hope my examples help, the code below is what made the video above!
 ```
