@@ -1,19 +1,22 @@
 local Promise, ActiveMenu = nil, false
 
 RegisterNUICallback("dataPost", function(data, cb)
-    if Promise ~= nil then
-        if data.returnValue then
-            Promise:resolve(data.returnValue)
-        else
-            Promise:resolve(true)
+    local rData = ActiveMenu[data.id]
+    if rData then
+        if Promise ~= nil then
+            if used.returnValue then
+                Promise:resolve(rData.returnValue)
+            else
+                Promise:resolve(true)
+            end
+            Promise = nil
         end
-        Promise = nil
-    end
-    if data.event and not data.returnValue then
-        if not data.server then
-            TriggerEvent(data.event, UnpackParams(data.args))
-        else
-            TriggerServerEvent(data.event, UnpackParams(data.args))
+        if rData.event and not rData.returnValue then
+            if not rData.server then
+                TriggerEvent(rData.event, UnpackParams(rData.args))
+            else
+                TriggerServerEvent(rData.event, UnpackParams(rData.args))
+            end
         end
     end
     CloseMenu()
@@ -30,10 +33,10 @@ RegisterNUICallback("cancel", function(data, cb)
 end)
 
 CreateMenu = function(data)
-    ActiveMenu = true
+    ActiveMenu = ProcessParams(data)
     SendNUIMessage({
         action = "OPEN_MENU",
-        data = ProcessParams(data)
+        data = data
     })
     SetNuiFocus(true, true)
 end
