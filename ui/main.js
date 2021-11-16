@@ -38,7 +38,7 @@ $(document).click(function (event) {
 })
 
 const PostData = (id) => {
-    $.post(`https://nh-context/dataPost`, JSON.stringify({id = id + 1}))
+    $.post(`https://nh-context/dataPost`, JSON.stringify({id: id + 1}))
 }
 
 const CancelMenu = () => {
