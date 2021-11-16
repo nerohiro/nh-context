@@ -2,7 +2,7 @@ local Promise, ActiveMenu = nil, false
 
 RegisterNUICallback("dataPost", function(data, cb)
     local id = tonumber(data.id) + 1 or nil
-    local rData = ActiveMenu[data.id]
+    local rData = ActiveMenu[id]
     if rData then
         if Promise ~= nil then
             if used.returnValue then
