@@ -5,7 +5,7 @@ RegisterNUICallback("dataPost", function(data, cb)
     local rData = ActiveMenu[id]
     if rData then
         if Promise ~= nil then
-            if used.returnValue then
+            if rData.returnValue then
                 Promise:resolve(rData.returnValue)
             else
                 Promise:resolve(true)
