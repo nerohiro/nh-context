@@ -7,7 +7,8 @@ RegisterNUICallback("dataPost", function(data, cb)
         if Promise ~= nil then
             Promise:resolve(rData.args)
             Promise = nil
-        elseif rData.event and Promise == nil then
+        end
+        if rData.event and Promise == nil then
             if not rData.server then
                 TriggerEvent(rData.event, UnpackParams(rData.args))
             else
