@@ -51,11 +51,29 @@ body::-webkit-scrollbar {
     user-select: none;
 }
 
-.button:hover {
-    background-color: #30475e;
+.buttonDisabled {
+    width: auto;
+    max-width: 45%;
+    height: 10%;
+    background: #707070;
+    margin: auto;
+    position: relative;
+    top: 10%;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    padding: 0.45rem;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+    user-select: none;
 }
 
-.button > .txt {
+.button:hover {
+    background-color: #30475e !important;
+}
+
+.context {
     color: rgb(232, 229, 229);
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
@@ -64,7 +82,16 @@ body::-webkit-scrollbar {
     font-weight: 300;
 }
 
-.button > .header {
+.footer {
+    color: rgb(232, 229, 229);
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+    overflow: hidden;
+    font-weight: 300;
+}
+
+.header {
     width: 100%;
     max-width: 100%;
     display: flex;
@@ -77,6 +104,17 @@ body::-webkit-scrollbar {
     font-size: 0.9rem;
     overflow: hidden;
     font-weight: 500;
+}
+
+.submenuicon {
+    position: absolute;
+    text-align: center;
+    right: 2%;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    fill: #707070;
+    opacity: 60%;
 }
 
 #imageHover {

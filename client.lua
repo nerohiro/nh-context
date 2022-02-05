@@ -5,14 +5,9 @@ RegisterNUICallback("dataPost", function(data, cb)
     local rData = ActiveMenu[id]
     if rData then
         if Promise ~= nil then
-            if rData.returnValue then
-                Promise:resolve(rData.returnValue)
-            else
-                Promise:resolve(true)
-            end
+            Promise:resolve(rData.args)
             Promise = nil
-        end
-        if rData.event and not rData.returnValue then
+        elseif rData.event and Promise == nil then
             if not rData.server then
                 TriggerEvent(rData.event, UnpackParams(rData.args))
             else
@@ -50,7 +45,7 @@ ContextMenu = function(data)
     
     CreateMenu(data)
     
-    return Citizen.Await(Promise)
+    return UnpackParams(Citizen.Await(Promise))
 end
 
 CloseMenu = function()
@@ -80,7 +75,7 @@ PackParams = function(arguments)
     local args, pack = arguments, {}
     
     for i = 1, 15, 1 do
-        pack[i] = {arg = args[i]}
+        pack[i] = args[i]
     end
     return pack
 end
@@ -90,7 +85,7 @@ UnpackParams = function(arguments, i)
     local index = i or 1
     
     if index <= #arguments then
-        return arguments[index].arg, UnpackParams(arguments, index + 1)
+        return arguments[index], UnpackParams(arguments, index + 1)
     end
 end
 

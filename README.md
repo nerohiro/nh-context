@@ -58,9 +58,12 @@ Note: Anything not marked "Required" below you don't even have to include if you
     {
         header = "The Header, whatever you want to put", -- Required
         context = "The base of the text in the button",
-        server = "pass "true" if you want the button to trigger a server event"
-        image = "add an image url here and itll show off to the left side when you hover over this button, example below"
-        event = "the event you actually want to trigger, remember if you set it server = true this will pass to the server side"
+        footer = "The bottom text on the button",
+        disabled = "pass "true" if you want to disable this button from being pressed, and will change to a disabled color",
+        subMenu = "pass "true" if you want to have a arrow showing that this button will access another menu",
+        server = "pass "true" if you want the button to trigger a server event",
+        image = "add an image url here and itll show off to the left side when you hover over this button, example below",
+        event = "the event you actually want to trigger, remember if you set it server = true this will pass to the server side",
         args = { -- These are the arguments you send with the event
             table,
             integer,
@@ -78,8 +81,7 @@ Example of using a table to build a menu:
 
 local menu = {
     {
-        header = "Title Here",
-        context = ""
+        header = "Title Here"
     }
 }
 
@@ -107,12 +109,12 @@ Exmaple of using the Function to build an asyncronous menu
         {
             header = "Number: " .. number,
             context = "ID: " .. id
-            returnValue = "1"
+            args = {"1"}
         },
         {
             header = "Number: " .. number,
             context = "ID: " .. id
-            returnValue = "2"
+            args = {"2"}
         },
     })
     if accept ~= nil then
